@@ -30,17 +30,31 @@ function App() {
   ];
 
   const [state, setState] = useState({
-    rows: []
+    rows: [],
+    sum: 0,
+    disabledForm: false,
   });
 
   const  styles  = useStyles();
   const removeRow = (idx) => {
-    setState({...state, rows: [...state.rows.filter((d,i) => i !== idx)]});
+    const row  = state.rows[idx];
+    setState({ 
+      rows: [...state.rows.filter((d,i) => i !== idx)],
+      sum: state.sum - parseInt(row.weight),
+      disabledForm: (state.sum - parseInt(row.weight)) >= 100
+    });
   };
 
   const handleSubmit = (row) => {
-    setState({...state, rows: [...state.rows, row]});
+    //check the weights
+    setState({
+      rows: [...state.rows, row],
+      sum: state.sum + parseInt(row.weight),
+      disabledForm: (state.sum + parseInt(row.weight)) >= 100
+    });
+    
   };
+
 
   return (
     <Container maxWidth="md">
@@ -50,7 +64,7 @@ function App() {
           </Typography>
         <Box my={4} display="flex" flexDirection="column" width={500}>
           <CriteriaTable  rows={state.rows} removeRow={removeRow}/>
-          <Form handleSubmit={handleSubmit}/>
+          <Form disabled={state.disabledForm} handleSubmit={handleSubmit} />
         </Box>
        </Box>
     </Container>

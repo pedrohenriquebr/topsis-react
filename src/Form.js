@@ -40,19 +40,21 @@ export default function Form(props) {
 
     const submitForm = (e) => {
         e.preventDefault();
+        return false;
         props.handleSubmit(state);
         setState(initState);
     }
       
     const {criterionName, weight, type} = state;
   return (
-        <form  className={styles.form} >
+        <form disabled className={styles.form} >
             <Box display="flex" flexDirection='row'>
-              <TextField required name="criterionName" className={styles.input} label="Critério" variant="filled" value={criterionName} onChange={handleChange} />
-              <FormControl required className={styles.formControl} variant="filled">
+              <TextField  disabled={props.disabled} required name="criterionName" 
+              className={styles.input} label="Critério" variant="filled" 
+              value={criterionName} onChange={handleChange} />
+              <FormControl disabled={props.disabled} required className={styles.formControl} variant="filled">
                 <InputLabel id="label-type">Tipo</InputLabel>
                 <Select
-                  
                   labelId="label-type"
                   name="type"
                   value={type}
@@ -62,9 +64,15 @@ export default function Form(props) {
                   <MenuItem value={2}>Benefício</MenuItem>
                 </Select>
               </FormControl>
-              <TextField required className={styles.input} type="number"  name="weight"  label="Peso (%)" variant="filled" value={weight} onChange={handleChange} />
+
+              <TextField maxdisabled={props.disabled} required className={styles.input}
+                type="number"  name="weight" label="Peso (%)" variant="filled" 
+                value={weight} onChange={handleChange} 
+              />
             </Box>
-            <Button className={styles.button} type="submit" onClick={submitForm} variant="contained" color="primary"> Adicionar </Button>
+
+            <Button disabled={props.disabled} className={styles.button} type="submit" 
+            onClick={submitForm} variant="contained" color="primary"> Adicionar </Button>
         </form>
   );
 }
