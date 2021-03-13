@@ -40,7 +40,6 @@ export default function Form(props) {
 
     const submitForm = (e) => {
         e.preventDefault();
-        return false;
         props.handleSubmit(state);
         setState(initState);
     }
