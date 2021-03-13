@@ -11,14 +11,13 @@ import { useState } from "react";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(0 , 1),
-    minWidth: 100
+    minWidth: 150
   },
   button: {
     margin: theme.spacing(1,0)
   },
   form : {
     margin: theme.spacing(2,0),
-    width: '20rem'
   }
 }));
 

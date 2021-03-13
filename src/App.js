@@ -48,7 +48,7 @@ function App() {
         <Typography variant="h4" component="h1">
               TOPSIS React
           </Typography>
-        <Box my={4} display="flex" flexDirection="column" >
+        <Box my={4} display="flex" flexDirection="column" width={500}>
           <CriteriaTable  rows={state.rows} removeRow={removeRow}/>
           <Form handleSubmit={handleSubmit}/>
         </Box>

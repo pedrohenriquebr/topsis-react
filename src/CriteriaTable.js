@@ -6,14 +6,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import {makeStyles} from '@material-ui/core/styles';
-
-
-const useStyles  = makeStyles((theme) =>({
-  table: {
-    width: 500
-  }
-}))
 
 export default function CriteriaTable(props) {
     const data_columns = [
@@ -22,10 +14,9 @@ export default function CriteriaTable(props) {
         {name:'Peso (%)', attribute: 'weight'},
         {name:'Remover'}
     ];
-    const styles  = useStyles();
 
     return (
-      <TableContainer component={Paper}  className={styles.table} >
+      <TableContainer component={Paper} >
         <Table  aria-label="a dense table">
           <TableHead>
             <TableRow>
@@ -33,7 +24,7 @@ export default function CriteriaTable(props) {
                     idx == 0 ?
                     <TableCell key={column.name}>{column.name}</TableCell>
                     :
-                    <TableCell align="right" key={column.name}>{column.name}</TableCell>
+                    <TableCell align="center" key={column.name}>{column.name}</TableCell>
                 ))}
             </TableRow>
           </TableHead>
@@ -43,9 +34,9 @@ export default function CriteriaTable(props) {
                 <TableCell component="th" scope="row">
                 {row.criterionName}
                 </TableCell>
-              <TableCell align="right">{row.type}</TableCell>
-              <TableCell align="right">{row.weight}</TableCell>
-              <TableCell align="right"><Button variant="contained" color="secondary" onClick={()=> props.removeRow(idx)} > Remover</Button></TableCell>
+              <TableCell align="center">{row.type == 1 ? "Custo": "Benefício"}</TableCell>
+              <TableCell align="center">{row.weight}</TableCell>
+              <TableCell align="center"><Button variant="contained" color="secondary" onClick={()=> props.removeRow(idx)} > Remover</Button></TableCell>
               </TableRow>
             ))}
           </TableBody>
