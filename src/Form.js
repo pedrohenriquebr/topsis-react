@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Form(props) {
     const initState = {
-        criterionName: ' ',
+        criterionName: '',
         weight: 0,
         type: 1
     };
@@ -64,7 +64,7 @@ export default function Form(props) {
                 </Select>
               </FormControl>
 
-              <TextField maxdisabled={props.disabled} required className={styles.input}
+              <TextField disabled={props.disabled} required className={styles.input}
                 type="number"  name="weight" label="Peso (%)" variant="filled" 
                 value={weight} onChange={handleChange} 
               />
