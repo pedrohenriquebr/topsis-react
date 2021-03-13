@@ -36,6 +36,7 @@ const columns = [
   
 export default function Grid(props){
     return (
-          <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
-      );
+      <div style={{width: '100%', height:300}}>
+          <DataGrid rows={rows} columns={props.columns} pageSize={5} />
+      </div>);
 }

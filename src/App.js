@@ -15,6 +15,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const criteriaToDataColumns = (criteria) => criteria.map((d) => (
+  {
+    field: d.criterionName,
+    headerName: [...d.criterionName[0].toUpperCase(), d.criterionName.slice(1)],
+    type: 'number'
+  }
+));
 function App() {
   const criteria = [
     { name: "Price", type: 1, weight: 0.1 },
@@ -81,8 +88,8 @@ function App() {
         </Box>
         {
         !state.disableGrid && 
-          <Box>
-          <Grid dataset={state.dataset} columns={state.criteria} />
+          <Box >
+          <Grid dataset={state.dataset} columns={criteriaToDataColumns(state.criteria)} />
           <GridForm disabled={state.disableGrid} handleSubmit={handleGridSubmit} />
           </Box>
         }
