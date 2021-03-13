@@ -5,6 +5,8 @@ import Typography  from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import CriteriaTable from './CriteriaTable';
 import Form from './Form';
+import Grid from './Grid';
+import GridForm from './GridForm';
 import topsis_predict from "./topsis";
 
 const useStyles = makeStyles(theme => ({
@@ -30,31 +32,42 @@ function App() {
   ];
 
   const [state, setState] = useState({
-    rows: [],
+    criteria: [],
     sum: 0,
     disabledForm: false,
+    disableGrid: true,
+    dataset: []
   });
 
   const  styles  = useStyles();
+  
   const removeRow = (idx) => {
-    const row  = state.rows[idx];
-    setState({ 
-      rows: [...state.rows.filter((d,i) => i !== idx)],
-      sum: state.sum - parseInt(row.weight),
-      disabledForm: (state.sum - parseInt(row.weight)) >= 100
+    const nextSum = state.sum - parseInt(state.criteria[idx].weight);
+    setState({...state,
+      criteria: [...state.criteria.filter((d,i) => i !== idx)],
+      sum: nextSum,
+      disabledForm: nextSum >= 100,
+      disableGrid: nextSum === 0
     });
   };
 
   const handleSubmit = (row) => {
     //check the weights
-    setState({
-      rows: [...state.rows, row],
-      sum: state.sum + parseInt(row.weight),
-      disabledForm: (state.sum + parseInt(row.weight)) >= 100
+    const nextSum = state.sum + parseInt(row.weight);
+    setState({...state,
+      criteria: [...state.criteria, {...row, weight: parseInt(row.weight)}],
+      sum: nextSum,
+      disabledForm: nextSum >= 100,
+      disableGrid: false
     });
     
   };
 
+  const handleGridSubmit = (row) => {
+    setState({...state,
+      dataset: [...state.dataset, row]
+    })
+  }
 
   return (
     <Container maxWidth="md">
@@ -63,9 +76,16 @@ function App() {
               TOPSIS React
           </Typography>
         <Box my={4} display="flex" flexDirection="column" width={500}>
-          <CriteriaTable  rows={state.rows} removeRow={removeRow}/>
+          <CriteriaTable  rows={state.criteria} removeRow={removeRow}/>
           <Form disabled={state.disabledForm} handleSubmit={handleSubmit} />
         </Box>
+        {
+        !state.disableGrid && 
+          <Box>
+          <Grid dataset={state.dataset} columns={state.criteria} />
+          <GridForm disabled={state.disableGrid} handleSubmit={handleGridSubmit} />
+          </Box>
+        }
        </Box>
     </Container>
   );
