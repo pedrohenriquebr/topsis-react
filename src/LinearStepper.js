@@ -46,6 +46,7 @@ export default function LinearStepper(props) {
     sum: 0,
     disabledForm: false,
     disableGrid: true,
+    disableResults: true,
     dataset: [],
   });
 
@@ -66,9 +67,11 @@ export default function LinearStepper(props) {
           <Box>
             <Grid
               dataset={state.dataset}
+              disable={state.disableGrid}
               columns={criteriaToDataColumns(state.criteria)}
             />
             <GridForm
+              fields={state.criteria.map(d => d.criterionName)}
               disabled={state.disableGrid}
               handleSubmit={handleGridSubmit}
             />
@@ -115,7 +118,7 @@ export default function LinearStepper(props) {
   };
 
   const handleGridSubmit = (row) => {
-    setState({ ...state, dataset: [...state.dataset, row] });
+    setState({ ...state, dataset: [...state.dataset, row], disableResults: false});
   };
 
   return (
@@ -155,7 +158,7 @@ export default function LinearStepper(props) {
               variant="contained"
               color="primary"
               onClick={handleNext}
-              disabled={state.disableGrid}
+              disabled={(activeStep == 0 && state.disableGrid )|| (activeStep == 1 && state.disableResults)}
               className={classes.button}
             >
               {activeStep === steps.length - 1 ? "Finalizar" : "Próximo"}
