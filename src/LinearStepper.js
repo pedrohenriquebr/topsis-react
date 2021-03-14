@@ -9,7 +9,7 @@ import Form from "./Form";
 import Grid from "./Grid";
 import GridForm from "./GridForm";
 import topsis_predict from "./topsis";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,11 +31,13 @@ function getSteps() {
 }
 
 const criteriaToDataColumns = (criteria) =>
-  criteria.map((d) => ({
+  [{field: 'name', headerName: 'Nome', width: 200},
+    ...criteria.map((d) => ({
     field: d.criterionName,
     headerName: [...d.criterionName[0].toUpperCase(), d.criterionName.slice(1)],
     type: "number",
-  }));
+    width: 160 
+  }))]
 
 export default function LinearStepper(props) {
   const classes = useStyles();
@@ -76,7 +78,7 @@ export default function LinearStepper(props) {
         return <Typography>Etapa desconhecida</Typography>;
     }
   }
-  
+
   const handleNext = () => {
     setActiveStep((prev) => prev + 1);
   };
@@ -153,6 +155,7 @@ export default function LinearStepper(props) {
               variant="contained"
               color="primary"
               onClick={handleNext}
+              disabled={state.disableGrid}
               className={classes.button}
             >
               {activeStep === steps.length - 1 ? "Finalizar" : "Próximo"}
