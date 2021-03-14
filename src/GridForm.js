@@ -31,7 +31,7 @@ const SheetJSFileExtensions = [
 
 export default function GridForm(props) {
     const initState = {
-        'Nome': '',
+        'name': '',
     };
 
     props.fields.forEach(d => {
@@ -62,9 +62,9 @@ export default function GridForm(props) {
   return (
         <form  className={styles.form} >
             <Box display="flex" flexDirection='row'>
-              <TextField  disabled={props.disabled} required name="Nome" 
+              <TextField  disabled={props.disabled} required name="name" 
                label="Nome" variant="filled" 
-              value={state.Nome} onChange={handleChange} />
+              value={state.name} onChange={handleChange} />
             
              {props.fields.map((d, idx) => (
                   <TextField key={idx} disabled={props.disabled} required className={styles.input}

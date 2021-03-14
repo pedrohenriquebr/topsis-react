@@ -19,7 +19,7 @@ export default function ResultGrid(props) {
         setTimeout(() => {
             setDataset(result.map((_idx, idx_ranking )=> ({
                 id: idx_ranking,
-                name: props.dataset[_idx].Nome,
+                name: props.dataset[_idx].name,
                 ranking: idx_ranking+1}
             )))
             setLoading(false);

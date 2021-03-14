@@ -62,7 +62,14 @@ export default function LinearStepper(props) {
     });
   };
 
-  const mapRows = (row, idx) => ({...row, id: idx + state.dataset.length });
+  const mapRows = (row, idx) => {
+    let _row = {...row};
+    _row.name = _row.Nome;
+    delete _row.Nome;
+   return  {..._row, 
+          name: _row.name, 
+          id: idx + state.dataset.length }
+  };
 
   const handleGridSubmit = (row) => {
     setState({ ...state, dataset: [...state.dataset, {...row, id: state.dataset.length}], disableResults: false});
@@ -78,6 +85,7 @@ export default function LinearStepper(props) {
       const wsname = wb.SheetNames[0];
       const ws = wb.Sheets[wsname];
       const data = XLSX.utils.sheet_to_json(ws, { header: 0 });
+      console.log(data.map(mapRows));
        setState({...state, dataset: data.map(mapRows),
           disableResults: false,
           loading: false

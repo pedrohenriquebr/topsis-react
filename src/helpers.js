@@ -1,5 +1,5 @@
 export function criteriaToDataColumns (criteria){
-    return [{field: 'Nome', headerName: 'Nome', width: 200},
+    return [{field: 'name', headerName: 'Nome', width: 200},
     ...criteria.map((d) => ({
     field: d.criterionName,
     headerName: [...d.criterionName[0].toUpperCase(), d.criterionName.slice(1)],
