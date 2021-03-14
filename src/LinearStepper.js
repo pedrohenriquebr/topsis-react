@@ -8,10 +8,11 @@ import CriteriaTable from "./CriteriaTable";
 import Form from "./Form";
 import Grid from "./Grid";
 import GridForm from "./GridForm";
-import topsis_predict from "./topsis";
+import ResultGrid from './ResultGrid';
 import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import XLSX from 'xlsx';
+import {criteriaToDataColumns} from './helpers';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,14 +32,7 @@ function getSteps() {
   return ["Insira os critérios", "Insira as alternativas", "Veja o resulado"];
 }
 
-const criteriaToDataColumns = (criteria) =>
-  [{field: 'Nome', headerName: 'Nome', width: 200},
-    ...criteria.map((d) => ({
-    field: d.criterionName,
-    headerName: [...d.criterionName[0].toUpperCase(), d.criterionName.slice(1)],
-    type: "number",
-    width: 160 
-  }))]
+
 
 export default function LinearStepper(props) {
   const classes = useStyles();
@@ -49,6 +43,7 @@ export default function LinearStepper(props) {
     disableGrid: true,
     disableResults: true,
     dataset: [],
+    loading: false
   });
 
   const [activeStep, setActiveStep] = useState(0);
@@ -74,6 +69,7 @@ export default function LinearStepper(props) {
   };
 
   const handleFile = (file) => {
+    setState({...state, loading: true});
 		const reader = new FileReader();
     const rABS = !!reader.readAsBinaryString;
     reader.onload = (e) => {
@@ -83,7 +79,8 @@ export default function LinearStepper(props) {
       const ws = wb.Sheets[wsname];
       const data = XLSX.utils.sheet_to_json(ws, { header: 0 });
        setState({...state, dataset: data.map(mapRows),
-          disableResults: false
+          disableResults: false,
+          loading: false
         });
     };
     if (rABS) reader.readAsBinaryString(file);
@@ -106,6 +103,7 @@ export default function LinearStepper(props) {
               dataset={state.dataset}
               disable={state.disableGrid}
               columns={criteriaToDataColumns(state.criteria)}
+              loading={state.loading}
             />
             <GridForm
               fields={state.criteria.map(d => d.criterionName)}
@@ -115,6 +113,16 @@ export default function LinearStepper(props) {
             />
           </Box>
         );
+      case 2:
+        return (
+          <Box>
+           <ResultGrid
+            dataset={state.dataset}
+            disable={state.disableResults}
+            criteria={state.criteria}
+           />
+          </Box>
+      );
       default:
         return <Typography>Etapa desconhecida</Typography>;
     }
@@ -143,7 +151,18 @@ export default function LinearStepper(props) {
     });
   };
 
-
+  useEffect(() =>{
+    setState({
+        ...state,
+        criteria:[
+            {criterionName: 'Preço', type: 1, weight: 10},
+            {criterionName: 'Hardware', type: 2, weight: 20},
+            {criterionName: 'Performance', type: 2, weight: 70},
+        ],
+        disableGrid: false,
+        disableResuls: true
+    })
+  },[])
 
   return (
     <Box className={classes.root}>
