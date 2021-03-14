@@ -23,7 +23,7 @@ export default function ResultGrid(props) {
                 ranking: idx_ranking+1}
             )))
             setLoading(false);
-        },2000);
+        },1000);
     },[]);
     
     return (
