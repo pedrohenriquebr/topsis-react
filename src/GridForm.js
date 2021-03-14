@@ -21,6 +21,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const SheetJSFileExtensions = [
+  "xlsx", "xlsb", "xlsm", "xls", "xml", 
+  "csv", "txt", "ods", "fods",
+   "uos", "sylk", "dif", "dbf", 
+   "prn", "qpw", "123", "wb*", "wq*", 
+   "html", "htm"
+].map(x => '.' + x).join(",");
+
 export default function GridForm(props) {
     const initState = {
         'Nome': '',
@@ -35,9 +43,14 @@ export default function GridForm(props) {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setState({...state,
-          [name]: value,
-        });
+        if (name === 'file-input'){
+          const files = event.target.files;
+          if(files && files[0]) props.handleFile(files[0]);
+        }else {
+          setState({...state,
+            [name]: value,
+          });
+      }
     };
 
     const submitForm = (e) => {
@@ -45,6 +58,7 @@ export default function GridForm(props) {
         props.handleSubmit(state);
         setState(initState);
     }
+
   return (
         <form  className={styles.form} >
             <Box display="flex" flexDirection='row'>
@@ -67,7 +81,9 @@ export default function GridForm(props) {
                 style={{ display: 'none' }}
                 type="file"
                 id="raised-button-file"
-                onChange={(e) => console.log('opa: ', e)}
+                name="file-input"
+                accept={SheetJSFileExtensions}
+                onChange={handleChange}
                 />
                 <label htmlFor="raised-button-file">
                 <Button disabled={props.disabled}  variant="contained" component="span"

@@ -11,6 +11,7 @@ import GridForm from "./GridForm";
 import topsis_predict from "./topsis";
 import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import XLSX from 'xlsx';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,9 +67,28 @@ export default function LinearStepper(props) {
     });
   };
 
+  const mapRows = (row, idx) => ({...row, id: idx + state.dataset.length });
+
   const handleGridSubmit = (row) => {
     setState({ ...state, dataset: [...state.dataset, {...row, id: state.dataset.length}], disableResults: false});
   };
+
+  const handleFile = (file) => {
+		const reader = new FileReader();
+    const rABS = !!reader.readAsBinaryString;
+    reader.onload = (e) => {
+      const bstr = e.target.result;
+      const wb = XLSX.read(bstr, { type: rABS ? "binary" : "array" });
+      const wsname = wb.SheetNames[0];
+      const ws = wb.Sheets[wsname];
+      const data = XLSX.utils.sheet_to_json(ws, { header: 0 });
+       setState({...state, dataset: data.map(mapRows),
+          disableResults: false
+        });
+    };
+    if (rABS) reader.readAsBinaryString(file);
+    else reader.readAsArrayBuffer(file);
+  }
 
   function getStepContent(step) {
     switch (step) {
@@ -91,6 +111,7 @@ export default function LinearStepper(props) {
               fields={state.criteria.map(d => d.criterionName)}
               disabled={state.disableGrid}
               handleSubmit={handleGridSubmit}
+              handleFile={handleFile}
             />
           </Box>
         );
