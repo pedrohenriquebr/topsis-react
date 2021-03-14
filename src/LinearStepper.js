@@ -31,7 +31,7 @@ function getSteps() {
 }
 
 const criteriaToDataColumns = (criteria) =>
-  [{field: 'name', headerName: 'Nome', width: 200},
+  [{field: 'Nome', headerName: 'Nome', width: 200},
     ...criteria.map((d) => ({
     field: d.criterionName,
     headerName: [...d.criterionName[0].toUpperCase(), d.criterionName.slice(1)],
@@ -118,7 +118,7 @@ export default function LinearStepper(props) {
   };
 
   const handleGridSubmit = (row) => {
-    setState({ ...state, dataset: [...state.dataset, row], disableResults: false});
+    setState({ ...state, dataset: [...state.dataset, {...row, id: state.dataset.length}], disableResults: false});
   };
 
   return (
