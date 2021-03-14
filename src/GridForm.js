@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(0, 1)
   },
   button: {
-    margin: theme.spacing(1,0)
+    margin: theme.spacing(1,1,1,0)
   },
   form : {
     margin: theme.spacing(2,0),
@@ -62,6 +62,19 @@ export default function GridForm(props) {
 
             <Button disabled={props.disabled} className={styles.button} type="submit" 
             onClick={submitForm} variant="contained" color="primary"> Adicionar </Button>
+            <input
+                className={styles.input}
+                style={{ display: 'none' }}
+                type="file"
+                id="raised-button-file"
+                onChange={(e) => console.log('opa: ', e)}
+                />
+                <label htmlFor="raised-button-file">
+                <Button disabled={props.disabled}  variant="contained" component="span"
+                 color="secondary" className={styles.button}>
+                    Carregar
+                </Button>
+                </label> 
         </form>
   );
 }
