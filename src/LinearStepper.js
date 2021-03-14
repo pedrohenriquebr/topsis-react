@@ -53,6 +53,23 @@ export default function LinearStepper(props) {
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
 
+  
+  const handleSubmit = (row) => {
+    //check the weights
+    const nextSum = state.sum + parseInt(row.weight);
+    setState({
+      ...state,
+      criteria: [...state.criteria, { ...row, weight: parseInt(row.weight) }],
+      sum: nextSum,
+      disabledForm: nextSum >= 100,
+      disableGrid: false,
+    });
+  };
+
+  const handleGridSubmit = (row) => {
+    setState({ ...state, dataset: [...state.dataset, {...row, id: state.dataset.length}], disableResults: false});
+  };
+
   function getStepContent(step) {
     switch (step) {
       case 0:
@@ -105,21 +122,7 @@ export default function LinearStepper(props) {
     });
   };
 
-  const handleSubmit = (row) => {
-    //check the weights
-    const nextSum = state.sum + parseInt(row.weight);
-    setState({
-      ...state,
-      criteria: [...state.criteria, { ...row, weight: parseInt(row.weight) }],
-      sum: nextSum,
-      disabledForm: nextSum >= 100,
-      disableGrid: false,
-    });
-  };
 
-  const handleGridSubmit = (row) => {
-    setState({ ...state, dataset: [...state.dataset, {...row, id: state.dataset.length}], disableResults: false});
-  };
 
   return (
     <Box className={classes.root}>
