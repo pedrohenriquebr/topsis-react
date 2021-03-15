@@ -159,19 +159,6 @@ export default function LinearStepper(props) {
     });
   };
 
-  useEffect(() =>{
-    setState({
-        ...state,
-        criteria:[
-            {criterionName: 'Preço', type: 1, weight: 10},
-            {criterionName: 'Hardware', type: 2, weight: 20},
-            {criterionName: 'Performance', type: 2, weight: 70},
-        ],
-        disableGrid: false,
-        disableResuls: true
-    })
-  },[])
-
   return (
     <Box className={classes.root}>
       <Stepper activeStep={activeStep}>
