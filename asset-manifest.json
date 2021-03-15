@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/static/js/main.a8865c2d.chunk.js",
-    "main.js.map": "/static/js/main.a8865c2d.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.c1fc34d5.js",
-    "runtime-main.js.map": "/static/js/runtime-main.c1fc34d5.js.map",
-    "static/js/2.ac814287.chunk.js": "/static/js/2.ac814287.chunk.js",
-    "static/js/2.ac814287.chunk.js.map": "/static/js/2.ac814287.chunk.js.map",
-    "index.html": "/index.html",
-    "static/js/2.ac814287.chunk.js.LICENSE.txt": "/static/js/2.ac814287.chunk.js.LICENSE.txt"
+    "main.js": "/topsis-react/static/js/main.a8865c2d.chunk.js",
+    "main.js.map": "/topsis-react/static/js/main.a8865c2d.chunk.js.map",
+    "runtime-main.js": "/topsis-react/static/js/runtime-main.ae966051.js",
+    "runtime-main.js.map": "/topsis-react/static/js/runtime-main.ae966051.js.map",
+    "static/js/2.146aebcd.chunk.js": "/topsis-react/static/js/2.146aebcd.chunk.js",
+    "static/js/2.146aebcd.chunk.js.map": "/topsis-react/static/js/2.146aebcd.chunk.js.map",
+    "index.html": "/topsis-react/index.html",
+    "static/js/2.146aebcd.chunk.js.LICENSE.txt": "/topsis-react/static/js/2.146aebcd.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.c1fc34d5.js",
-    "static/js/2.ac814287.chunk.js",
+    "static/js/runtime-main.ae966051.js",
+    "static/js/2.146aebcd.chunk.js",
     "static/js/main.a8865c2d.chunk.js"
   ]
 }
