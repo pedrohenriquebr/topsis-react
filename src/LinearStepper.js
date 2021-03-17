@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ["Insira os critérios", "Insira as alternativas", "Veja o resulado"];
+  return ["Insira os critérios", "Insira as alternativas", "Veja o resultado"];
 }
 
 
