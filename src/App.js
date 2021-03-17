@@ -1,18 +1,36 @@
 import Container from '@material-ui/core/Container';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import Typography  from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import LinearStepper from './LinearStepper';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1
+  },
+  title :{
+    flexGrow: 1,
+    textAlign: 'center'
+  },
+}));
 
 function App() {
+  const classes  = useStyles();
   return (
-    <Container maxWidth="md">
-       <Box my={4} >
-        <Typography variant="h4" component="h1">
-              TOPSIS React
-          </Typography>
-      <LinearStepper />
-      </Box>
-    </Container>
+   <Box className={classes.root}>
+      <AppBar position="static">
+      <Toolbar >
+        <Typography variant="h6" className={classes.title} component="h1">
+          TOPSIS React
+        </Typography>
+      </Toolbar>
+      </AppBar>
+      <Container maxWidth="md">
+        <LinearStepper />
+      </Container>
+   </Box>
   );
 }
 
