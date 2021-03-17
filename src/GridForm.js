@@ -60,7 +60,7 @@ export default function GridForm(props) {
     }
 
   return (
-        <form  className={styles.form} >
+        <form className={styles.form} onSubmit={submitForm} >
             <Box display="flex" flexDirection='row'>
               <TextField  disabled={props.disabled} required name="name" 
                label="Nome" variant="filled" 
@@ -75,7 +75,7 @@ export default function GridForm(props) {
             </Box>
 
             <Button disabled={props.disabled} className={styles.button} type="submit" 
-            onClick={submitForm} variant="contained" color="primary"> Adicionar </Button>
+            variant="contained" color="primary"> Adicionar </Button>
             <input
                 className={styles.input}
                 style={{ display: 'none' }}
@@ -85,12 +85,12 @@ export default function GridForm(props) {
                 accept={SheetJSFileExtensions}
                 onChange={handleChange}
                 />
-                <label htmlFor="raised-button-file">
+              <label htmlFor="raised-button-file">
                 <Button disabled={props.disabled}  variant="contained" component="span"
                  color="secondary" className={styles.button}>
                     Carregar
                 </Button>
-                </label> 
+              </label> 
         </form>
   );
 }

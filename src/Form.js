@@ -46,7 +46,7 @@ export default function Form(props) {
       
     const {criterionName, weight, type} = state;
   return (
-        <form disabled className={styles.form} >
+        <form disabled className={styles.form} onSubmit={submitForm}>
             <Box display="flex" flexDirection='row'>
               <TextField  disabled={props.disabled} required name="criterionName" 
               className={styles.input} label="Critério" variant="filled" 
@@ -70,8 +70,7 @@ export default function Form(props) {
               />
             </Box>
 
-            <Button disabled={props.disabled} className={styles.button} type="submit" 
-            onClick={submitForm} variant="contained" color="primary"> Adicionar </Button>
+            <Button disabled={props.disabled} className={styles.button} type="submit"  variant="contained" color="primary"> Adicionar </Button>
         </form>
   );
 }
