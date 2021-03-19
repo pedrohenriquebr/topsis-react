@@ -24,7 +24,7 @@ export default function ResultGrid(props) {
             )))
             setLoading(false);
         },1000);
-    },[]);
+    },[props.criteria, props.dataset]);
     
     return (
     <Grid

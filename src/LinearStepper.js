@@ -9,7 +9,8 @@ import Form from "./Form";
 import Grid from "./Grid";
 import GridForm from "./GridForm";
 import ResultGrid from './ResultGrid';
-import { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
+import { useState, Suspense } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import XLSX from 'xlsx';
 import {criteriaToDataColumns} from './helpers';
@@ -28,14 +29,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function getSteps() {
-  return ["Insira os critérios", "Insira as alternativas", "Veja o resultado"];
-}
-
-
 
 export default function LinearStepper(props) {
   const classes = useStyles();
+  const { t, i18n } = useTranslation();
   const [state, setState] = useState({
     criteria: [],
     sum: 0,
@@ -47,7 +44,7 @@ export default function LinearStepper(props) {
   });
 
   const [activeStep, setActiveStep] = useState(0);
-  const steps = getSteps();
+  const steps = ['INSERTCRITERIA','INSERTDATASET', 'SEERESULTS'];
 
   
   const handleSubmit = (row) => {
@@ -162,7 +159,7 @@ export default function LinearStepper(props) {
   return (
     <Box className={classes.root}>
       <Stepper activeStep={activeStep}>
-        {steps.map((label, idx) => {
+       {steps.map((label, idx) => {
           const stepProps = {};
           const labelProps = {};
           return (
