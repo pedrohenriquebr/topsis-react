@@ -164,7 +164,7 @@ export default function LinearStepper(props) {
           const labelProps = {};
           return (
             <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
+              <StepLabel {...labelProps}>{t(label)}</StepLabel>
             </Step>
           );
         })}

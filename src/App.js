@@ -25,7 +25,7 @@ function App() {
    <Box className={classes.root}>
       <AppBar position="static">
       <Toolbar >
-        <Suspense>
+        <Suspense fallback='loading...'>
         <Typography variant="h6" className={classes.title} component="h1">
           {t('TITLE')}
         </Typography>
