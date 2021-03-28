@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import {makeStyles} from "@material-ui/core/styles";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -30,6 +31,8 @@ export default function Form(props) {
 
     const styles  = useStyles();
     const [state, setState] = useState(initState);
+    const { t, i18n } = useTranslation();
+
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -49,28 +52,28 @@ export default function Form(props) {
         <form disabled className={styles.form} onSubmit={submitForm}>
             <Box display="flex" flexDirection='row'>
               <TextField  disabled={props.disabled} required name="criterionName" 
-              className={styles.input} label="Critério" variant="filled" 
+              className={styles.input} label={t('DATA_COLUMN_CRITERION')} variant="filled" 
               value={criterionName} onChange={handleChange} />
               <FormControl disabled={props.disabled} required className={styles.formControl} variant="filled">
-                <InputLabel id="label-type">Tipo</InputLabel>
+                <InputLabel id="label-type">{t('DATA_COLUMN_TYPE')}</InputLabel>
                 <Select
                   labelId="label-type"
-                  name="type"
+                  name='type'
                   value={type}
                   onChange={handleChange}
                 >
-                  <MenuItem value={1}>Custo</MenuItem>
-                  <MenuItem value={2}>Benefício</MenuItem>
+                  <MenuItem value={1}>{t('CRITERION_TYPE_COST')}</MenuItem>
+                  <MenuItem value={2}>{t('CRITERION_TYPE_BENEFIT')}</MenuItem>
                 </Select>
               </FormControl>
 
               <TextField disabled={props.disabled} required className={styles.input}
-                type="number"  name="weight" label="Peso (%)" variant="filled" 
+                type="number"  name="weight" label={t('DATA_COLUMN_WEIGHT') + " (%)"} variant="filled" 
                 value={weight} onChange={handleChange} 
               />
             </Box>
 
-            <Button disabled={props.disabled} className={styles.button} type="submit"  variant="contained" color="primary"> Adicionar </Button>
+            <Button disabled={props.disabled} className={styles.button} type="submit"  variant="contained" color="primary"> {t('BUTTONS_ADD')} </Button>
         </form>
   );
 }

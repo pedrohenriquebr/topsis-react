@@ -2,5 +2,19 @@
     "INSERTCRITERIA": "Insira os critérios",
     "INSERTDATASET": "Insira as alternativas",
     "SEERESULTS": "Veja o resultado",
-    "TITLE":"TOPSIS React"
+    "TITLE":"TOPSIS React",
+    "BUTTON_NEXT":"Próximo",
+    "BUTTON_FINISH":"Finalizar",
+    "BUTTON_BACK": "Voltar",
+    "DATA_COLUMN_NAME": "Nome",
+    "DATA_COLUMN_CRITERION":"Critério",
+    "DATA_COLUMN_TYPE":"Tipo",
+    "DATA_COLUMN_WEIGHT":"Peso",
+    "CRITERION_TYPE_COST": "Custo",
+    "CRITERION_TYPE_BENEFIT": "Benefício",
+    "BUTTONS_REMOVE": "Remove",
+    "BUTTONS_LOAD": "Carregar",
+    "BUTTONS_ADD": "Adicionar",
+    "UNKNOWN_STEP":"Etapa desconhecida",
+    "ALL_STEPS_COMPLETED": "Todas as etapas completadas"
 }

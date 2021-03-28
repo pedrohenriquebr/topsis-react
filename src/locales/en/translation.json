@@ -2,5 +2,19 @@
     "INSERTCRITERIA": "Insert your criteria",
     "INSERTDATASET": "Insert your dataset",
     "SEERESULTS": "See the results",
-    "TITLE": "TOPSIS React"
+    "TITLE": "TOPSIS React",
+    "BUTTON_NEXT":"Next",
+    "BUTTON_FINISH":"Finish",
+    "BUTTON_BACK": "Back",
+    "DATA_COLUMN_NAME": "Name",
+    "DATA_COLUMN_CRITERION":"Criterion",
+    "DATA_COLUMN_TYPE":"Type",
+    "DATA_COLUMN_WEIGHT":"Weight",
+    "CRITERION_TYPE_COST": "Cost",
+    "CRITERION_TYPE_BENEFIT": "Benefit",
+    "BUTTONS_REMOVE": "Remove",
+    "BUTTONS_LOAD": "Load",
+    "BUTTONS_ADD": "Add",
+    "UNKNOWN_STEP":"Unknown Step",
+    "ALL_STEPS_COMPLETED": "All steps completed"
 }

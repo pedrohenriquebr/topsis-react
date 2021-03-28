@@ -1,14 +1,17 @@
 import Grid from "./Grid";
 import { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import topsis_predict from "./topsis";
-
-const columns = [
-    {field:'ranking', headerName: '#', type:"number", width: 60},
-    {field:'name', headerName: 'Nome', width: 160},
-];
 
 
 export default function ResultGrid(props) {
+    const {t, i18n} = useTranslation();
+    
+    const columns = [
+        {field:'ranking', headerName: '#', type:"number", width: 60},
+        {field:'name', headerName: t('DATA_COLUMN_NAME'), width: 160},
+    ];
+
     const [loading, setLoading] = useState(true);
     const [dataset, setDataset] = useState([]);
 
