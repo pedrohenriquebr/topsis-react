@@ -9,7 +9,8 @@ import Form from "./Form";
 import Grid from "./Grid";
 import GridForm from "./GridForm";
 import ResultGrid from './ResultGrid';
-import { useState, useEffect } from "react";
+import { useTranslation,  } from 'react-i18next';
+import { useState, Suspense } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import XLSX from 'xlsx';
 import {criteriaToDataColumns} from './helpers';
@@ -28,14 +29,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function getSteps() {
-  return ["Insira os critérios", "Insira as alternativas", "Veja o resultado"];
-}
-
-
 
 export default function LinearStepper(props) {
   const classes = useStyles();
+  const { t, i18n } = useTranslation();
+  const dataColumnName = t('DATA_COLUMN_NAME');
   const [state, setState] = useState({
     criteria: [],
     sum: 0,
@@ -47,7 +45,7 @@ export default function LinearStepper(props) {
   });
 
   const [activeStep, setActiveStep] = useState(0);
-  const steps = getSteps();
+  const steps = ['INSERTCRITERIA','INSERTDATASET', 'SEERESULTS'];
 
   
   const handleSubmit = (row) => {
@@ -64,8 +62,8 @@ export default function LinearStepper(props) {
 
   const mapRows = (row, idx) => {
     let _row = {...row};
-    _row.name = _row.Nome;
-    delete _row.Nome;
+    _row.name = _row[dataColumnName];
+    delete _row[dataColumnName];
    return  {..._row, 
           name: _row.name, 
           id: idx + state.dataset.length }
@@ -132,7 +130,7 @@ export default function LinearStepper(props) {
           </Box>
       );
       default:
-        return <Typography>Etapa desconhecida</Typography>;
+        return <Typography>{t('UNKNOWN_STEP')}</Typography>;
     }
   }
 
@@ -162,12 +160,12 @@ export default function LinearStepper(props) {
   return (
     <Box className={classes.root}>
       <Stepper activeStep={activeStep}>
-        {steps.map((label, idx) => {
+       {steps.map((label, idx) => {
           const stepProps = {};
           const labelProps = {};
           return (
             <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
+              <StepLabel {...labelProps}>{t(label)}</StepLabel>
             </Step>
           );
         })}
@@ -175,7 +173,7 @@ export default function LinearStepper(props) {
       {activeStep === steps.length ? (
         <div>
           <Typography className={classes.instructions}>
-            Todas as etapas completadas
+            {t('ALL_STEPS_COMPLETED')}
           </Typography>
           <Button onClick={handleReset} className={classes.button}>
             Reset
@@ -190,7 +188,7 @@ export default function LinearStepper(props) {
               onClick={handleBack}
               className={classes.button}
             >
-              Back
+              {t('BUTTON_BACK')}
             </Button>
             <Button
               variant="contained"
@@ -199,7 +197,7 @@ export default function LinearStepper(props) {
               disabled={(activeStep == 0 && state.disableGrid )|| (activeStep == 1 && state.disableResults)}
               className={classes.button}
             >
-              {activeStep === steps.length - 1 ? "Finalizar" : "Próximo"}
+              {activeStep === steps.length - 1 ? t('BUTTON_FINISH') : t('BUTTON_NEXT')}
             </Button>
           </div>
         </div>

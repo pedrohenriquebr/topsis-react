@@ -5,6 +5,8 @@ import Typography  from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import LinearStepper from './LinearStepper';
 import { makeStyles } from '@material-ui/core/styles';
+import { Suspense} from 'react';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,13 +20,16 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes  = useStyles();
+  const {t } = useTranslation();
   return (
    <Box className={classes.root}>
       <AppBar position="static">
       <Toolbar >
+        <Suspense fallback='loading...'>
         <Typography variant="h6" className={classes.title} component="h1">
-          TOPSIS React
+          {t('TITLE')}
         </Typography>
+        </Suspense>
       </Toolbar>
       </AppBar>
       <Container maxWidth="md">

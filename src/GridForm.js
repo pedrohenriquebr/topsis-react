@@ -3,6 +3,8 @@ import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import {makeStyles} from "@material-ui/core/styles";
 import { useState } from "react";
+import { useTranslation  } from 'react-i18next';
+
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -40,6 +42,7 @@ export default function GridForm(props) {
 
     const styles  = useStyles();
     const [state, setState] = useState(initState);
+    const  {t, i18n} = useTranslation();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -63,7 +66,7 @@ export default function GridForm(props) {
         <form className={styles.form} onSubmit={submitForm} >
             <Box display="flex" flexDirection='row'>
               <TextField  disabled={props.disabled} required name="name" 
-               label="Nome" variant="filled" 
+               label={t('DATA_COLUMN_NAME')} variant="filled" 
               value={state.name} onChange={handleChange} />
             
              {props.fields.map((d, idx) => (
@@ -75,7 +78,7 @@ export default function GridForm(props) {
             </Box>
 
             <Button disabled={props.disabled} className={styles.button} type="submit" 
-            variant="contained" color="primary"> Adicionar </Button>
+            variant="contained" color="primary"> {t('BUTTONS_ADD')} </Button>
             <input
                 className={styles.input}
                 style={{ display: 'none' }}
@@ -88,7 +91,7 @@ export default function GridForm(props) {
               <label htmlFor="raised-button-file">
                 <Button disabled={props.disabled}  variant="contained" component="span"
                  color="secondary" className={styles.button}>
-                    Carregar
+                   {t('BUTTONS_LOAD')}
                 </Button>
               </label> 
         </form>

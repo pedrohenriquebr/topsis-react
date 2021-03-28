@@ -6,14 +6,18 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import {useTranslation} from 'react-i18next';
 
 export default function CriteriaTable(props) {
+    const { t, i18n} = useTranslation();
+
     const data_columns = [
-        {name:'Critério', attribute:'criterionName'},
-        {name:'Tipo', attribute:'type'},
-        {name:'Peso (%)', attribute: 'weight'},
-        {name:'Remover'}
+        {name: t('DATA_COLUMN_CRITERION'), attribute:'criterionName'},
+        {name: t('DATA_COLUMN_TYPE'), attribute:'type'},
+        {name: t('DATA_COLUMN_WEIGHT')+' (%)', attribute: 'weight'},
+        {name: t('BUTTONS_REMOVE')}
     ];
+
 
     return (
       <TableContainer component={Paper} >
@@ -21,7 +25,7 @@ export default function CriteriaTable(props) {
           <TableHead>
             <TableRow>
                 {data_columns.map((column,idx) => (
-                    idx == 0 ?
+                    idx === 0 ?
                     <TableCell key={column.name}>{column.name}</TableCell>
                     :
                     <TableCell align="center" key={column.name}>{column.name}</TableCell>
@@ -34,7 +38,7 @@ export default function CriteriaTable(props) {
                 <TableCell component="th" scope="row">
                 {row.criterionName}
                 </TableCell>
-              <TableCell align="center">{row.type == 1 ? "Custo": "Benefício"}</TableCell>
+              <TableCell align="center">{row.type === 1 ? t('CRITERION_TYPE_COST'): t('CRITERION_TYPE_BENEFIT')}</TableCell>
               <TableCell align="center">{row.weight}</TableCell>
               <TableCell align="center"><Button variant="contained" color="secondary" onClick={()=> props.removeRow(idx)} > Remover</Button></TableCell>
               </TableRow>
