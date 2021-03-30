@@ -23,7 +23,6 @@ Add a column "Name" with name of the alternative.
 
 Set weight for each criterion with your preferences.
 
-![image](https://user-images.githubusercontent.com/25212918/112932672-b2bbbc80-90f4-11eb-938f-3cf6bc3e4ed8.png)
 ![image](https://user-images.githubusercontent.com/25212918/112931556-c534f680-90f2-11eb-8446-a38790bae94d.png)
 
 
@@ -39,7 +38,8 @@ You can add a row manually
 
 ### See results
 
-Finally, see the results
+Finally, see the results.
+The top ranking with best alternatives. 
 
 ![image](https://user-images.githubusercontent.com/25212918/112932782-ed255980-90f4-11eb-9c85-482ecde52cc7.png)
 
