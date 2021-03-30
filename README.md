@@ -7,28 +7,40 @@
 
 This project is a web app implementation for this algorithm.
 
-## Steps
+## Guide with example
 
-### 1. Prepare the dataset on excel file
+### Prepare the dataset on spreadsheet
 
-![image](https://user-images.githubusercontent.com/25212918/111411955-41bee280-86ba-11eb-9ef5-0b5644bea6ef.png)
+Create your spreadsheet with needed data.
 
-### 2. Set the weights for each field
+Add a column "Name" with name of the alternative.
 
-![image](https://user-images.githubusercontent.com/25212918/111412079-7fbc0680-86ba-11eb-8de4-30a6df4152ce.png)
+![image](https://user-images.githubusercontent.com/25212918/112929400-bba98f80-90ee-11eb-9bce-e5129cdad5b3.png)
 
-> The sum of the weights must to be equals 100
+> Data from [Tudo Celular](http://tudocelular.com/)
 
+### Set the weights
 
-## 3. Loading the dataset file
+Set weight for each criterion with your preferences.
 
-Click the "Carregar" button to loads the file and select it.
-
-![image](https://user-images.githubusercontent.com/25212918/111412884-fc031980-86bb-11eb-96bb-4d1799ae634a.png)
-
-> You can add a row manually
+![image](https://user-images.githubusercontent.com/25212918/112932672-b2bbbc80-90f4-11eb-938f-3cf6bc3e4ed8.png)
+![image](https://user-images.githubusercontent.com/25212918/112931556-c534f680-90f2-11eb-8446-a38790bae94d.png)
 
 
-### 4. View results
+> The sum of the weights has to be equals 100
 
-![image](https://user-images.githubusercontent.com/25212918/111412979-27860400-86bc-11eb-8f8a-c4d4c2a2450b.png)
+## Loading the dataset
+
+Click the "Load" button and select the spreadsheet file.
+
+You can add a row manually
+
+![image](https://user-images.githubusercontent.com/25212918/112932188-de8a7280-90f3-11eb-91dd-ac96e4e0c479.png)
+
+### See results
+
+Finally, see the results
+
+![image](https://user-images.githubusercontent.com/25212918/112932782-ed255980-90f4-11eb-9c85-482ecde52cc7.png)
+
+
