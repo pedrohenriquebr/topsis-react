@@ -28,7 +28,7 @@ Set weight for each criterion with your preferences.
 
 > The sum of the weights has to be equals 100
 
-## Loading the dataset
+### Loading the dataset
 
 Click the "Load" button and select the spreadsheet file.
 
