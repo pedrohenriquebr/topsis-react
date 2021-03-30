@@ -40,7 +40,7 @@ export default function CriteriaTable(props) {
                 </TableCell>
               <TableCell align="center">{row.type === 1 ? t('CRITERION_TYPE_COST'): t('CRITERION_TYPE_BENEFIT')}</TableCell>
               <TableCell align="center">{row.weight}</TableCell>
-              <TableCell align="center"><Button variant="contained" color="secondary" onClick={()=> props.removeRow(idx)} > Remover</Button></TableCell>
+              <TableCell align="center"><Button variant="contained" color="secondary" onClick={()=> props.removeRow(idx)} > {t('BUTTONS_REMOVE')} </Button></TableCell>
               </TableRow>
             ))}
           </TableBody>
