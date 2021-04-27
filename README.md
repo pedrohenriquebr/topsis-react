@@ -17,7 +17,7 @@ Add a column "Name" with name of the alternative.
 
 ![image](https://user-images.githubusercontent.com/25212918/112929400-bba98f80-90ee-11eb-9bce-e5129cdad5b3.png)
 
-> Data from [Tudo Celular](http://tudocelular.com/)
+> If your language is portuguese, this column will be "Nome"
 
 ### Set the weights
 
