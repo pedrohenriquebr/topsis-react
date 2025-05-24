@@ -5,7 +5,7 @@ import topsis_predict from "./topsis";
 
 
 export default function ResultGrid(props) {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
     
     const columns = [
         {field:'ranking', headerName: '#', type:"number", width: 60},

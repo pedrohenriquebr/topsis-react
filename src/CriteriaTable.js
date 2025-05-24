@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import {useTranslation} from 'react-i18next';
 
 export default function CriteriaTable(props) {
-    const { t, i18n} = useTranslation();
+    const { t } = useTranslation();
 
     const data_columns = [
         {name: t('DATA_COLUMN_CRITERION'), attribute:'criterionName'},
