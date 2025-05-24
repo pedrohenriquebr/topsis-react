@@ -31,7 +31,7 @@ export default function Form(props) {
 
     const styles  = useStyles();
     const [state, setState] = useState(initState);
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
 
     const handleChange = (event) => {

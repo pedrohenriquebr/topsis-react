@@ -10,7 +10,7 @@ import Grid from "./Grid";
 import GridForm from "./GridForm";
 import ResultGrid from './ResultGrid';
 import { useTranslation,  } from 'react-i18next';
-import { useState, Suspense } from "react";
+import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import XLSX from 'xlsx';
 import {criteriaToDataColumns} from './helpers';
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LinearStepper(props) {
   const classes = useStyles();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const dataColumnName = t('DATA_COLUMN_NAME');
   const [state, setState] = useState({
     criteria: [],
@@ -292,7 +292,7 @@ export default function LinearStepper(props) {
               variant="contained"
               color="primary"
               onClick={handleNext}
-              disabled={(activeStep == 0 && state.disableGrid )|| (activeStep == 1 && state.disableResults)}
+              disabled={(activeStep === 0 && state.disableGrid )|| (activeStep === 1 && state.disableResults)}
               className={classes.button}
             >
               {activeStep === steps.length - 1 ? t('BUTTON_FINISH') : t('BUTTON_NEXT')}
