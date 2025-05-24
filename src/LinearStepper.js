@@ -15,6 +15,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import XLSX from 'xlsx';
 import {criteriaToDataColumns} from './helpers';
 
+// Helper function to reorder list
+const reorder = (list, startIndex, endIndex) => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+  return result;
+};
+
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(6, 0, 3),
@@ -57,6 +65,26 @@ export default function LinearStepper(props) {
       sum: nextSum,
       disabledForm: nextSum >= 100,
       disableGrid: false,
+    });
+  };
+
+  const handleOnDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+    if (result.destination.index === result.source.index) {
+      return;
+    }
+
+    const items = reorder(
+      state.criteria,
+      result.source.index,
+      result.destination.index
+    );
+
+    setState({
+      ...state,
+      criteria: items,
     });
   };
 
@@ -185,7 +213,11 @@ export default function LinearStepper(props) {
       case 0:
         return (
           <Box>
-            <CriteriaTable rows={state.criteria} removeRow={removeRow} />
+            <CriteriaTable 
+                rows={state.criteria} 
+                removeRow={removeRow} 
+                handleOnDragEnd={handleOnDragEnd} 
+            />
             <Box mt={2} mb={2}> {/* Added Box for spacing */}
               <Button
                 variant="outlined" // Added variant for better appearance
