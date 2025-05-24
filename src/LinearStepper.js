@@ -93,12 +93,110 @@ export default function LinearStepper(props) {
     else reader.readAsArrayBuffer(file);
   }
 
+  const handleRandomizeWeights = () => {
+    if (state.criteria.length === 0) {
+      return;
+    }
+
+    // Deep copy criteria
+    const newCriteria = JSON.parse(JSON.stringify(state.criteria));
+
+    // Generate N random numbers with order-based bias
+    const N = newCriteria.length;
+    const randomNumbers = newCriteria.map((_, i) => (Math.random() * (N - i)) + 0.0001);
+
+    // Calculate sum of random numbers
+    let sumOfRandomNumbers = randomNumbers.reduce((acc, val) => acc + val, 0);
+
+    // Handle edge case where sum is 0
+    if (sumOfRandomNumbers === 0) {
+      // Assign equal weights if sum is 0
+      const equalWeight = Math.floor(100 / newCriteria.length);
+      let remainder = 100 % newCriteria.length;
+      newCriteria.forEach((criterion, index) => {
+        criterion.weight = equalWeight + (remainder > 0 ? 1 : 0);
+        if (remainder > 0) {
+          remainder--;
+        }
+      });
+      setState({
+        ...state,
+        criteria: newCriteria,
+        sum: 100,
+        disabledForm: true,
+      });
+      return;
+    }
+
+    // Calculate proportional weights and round them
+    let roundedWeights = newCriteria.map((criterion, index) => {
+      const proportionalWeight = (randomNumbers[index] / sumOfRandomNumbers) * 100;
+      return Math.round(proportionalWeight);
+    });
+
+    // Calculate sum of rounded weights
+    let currentSumRounded = roundedWeights.reduce((acc, val) => acc + val, 0);
+
+    // Calculate difference
+    let diff = 100 - currentSumRounded;
+
+    // Distribute the difference
+    // Add or subtract difference from weights one by one
+    // This simple distribution might not be perfectly even but works for most cases
+    for (let i = 0; i < Math.abs(diff); i++) {
+      const weightIndexToAdjust = i % roundedWeights.length;
+      if (diff > 0) {
+        roundedWeights[weightIndexToAdjust]++;
+      } else {
+        // Ensure weight doesn't go below 0, though unlikely with positive random numbers
+        if (roundedWeights[weightIndexToAdjust] > 0) {
+          roundedWeights[weightIndexToAdjust]--;
+        } else {
+          // If a weight is already 0 and we need to decrease, try the next one
+          // This could be improved by finding a non-zero weight to decrement
+           for(let j = 0; j < roundedWeights.length; j++) {
+             const nextIndex = (weightIndexToAdjust + j + 1) % roundedWeights.length;
+             if (roundedWeights[nextIndex] > 0) {
+                roundedWeights[nextIndex]--;
+                break;
+             }
+           }
+        }
+      }
+    }
+    
+    // Update the weight property of each criterion
+    newCriteria.forEach((criterion, index) => {
+      criterion.weight = roundedWeights[index];
+    });
+
+    // Update state
+    setState({
+      ...state,
+      criteria: newCriteria,
+      sum: 100, // Sum is now 100
+      disabledForm: true, // Form should be disabled as sum is 100
+      disableGrid: false, // Enable grid as criteria are now set with weights
+    });
+  };
+
   function getStepContent(step) {
     switch (step) {
       case 0:
         return (
           <Box>
             <CriteriaTable rows={state.criteria} removeRow={removeRow} />
+            <Box mt={2} mb={2}> {/* Added Box for spacing */}
+              <Button
+                variant="outlined" // Added variant for better appearance
+                color="secondary" // Added color for distinction
+                className={classes.button}
+                onClick={handleRandomizeWeights} // Connected the function
+                disabled={state.criteria.length === 0}
+              >
+                Randomize Weights
+              </Button>
+            </Box>
             <Form disabled={state.disabledForm} handleSubmit={handleSubmit} />
           </Box>
         );
